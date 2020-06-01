@@ -11,7 +11,7 @@ pipeline {
       steps {
         withCredentials(bindings: [[$class: 'UsernamePasswordMultiBinding', credentialsId: 'dockerhub', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD']]) {
           sh '''
-                            docker build -t docker -f Dockerfile
+                            docker build -t emjotpe/capstone_cloud_devops -f Dockerfile
                         '''
         }
 
@@ -23,7 +23,7 @@ pipeline {
         withCredentials(bindings: [[$class: 'UsernamePasswordMultiBinding', credentialsId: 'dockerhub', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD']]) {
           sh '''
                             docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-                            docker push mplisz/capstone_cloud_devops
+                            docker push emjotpe/capstone_cloud_devops
                         '''
         }
 
