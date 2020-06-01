@@ -29,7 +29,7 @@ pipeline {
         steps {
             withAWS(region: 'us-west-2', credentials: 'capstone') {
                 sh '''
-                sudo kubectl config use-context arn:aws:eks:us-west-2:411233875469:cluster/capstonecluster
+                kubectl config use-context arn:aws:eks:us-west-2:411233875469:cluster/capstonecluster
                 '''
             }
         }
