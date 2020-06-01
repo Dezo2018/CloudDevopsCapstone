@@ -11,7 +11,7 @@ pipeline {
       steps {
         withCredentials(bindings: [[$class: 'UsernamePasswordMultiBinding', credentialsId: 'dockerhub', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD']]) {
           sh '''
-                            docker build -t docker .
+                            docker build -t docker -f Dockerfile
                         '''
         }
 
