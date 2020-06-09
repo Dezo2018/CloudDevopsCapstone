@@ -23,7 +23,7 @@ pipeline {
                 docker push emjotpe/capstone_cloud_devops
                 '''
             }
-        }
+	}
     }
     stage('Set current kubectl context') {
         steps {
@@ -51,6 +51,23 @@ pipeline {
 		''' 
             }
         }
-    }
   }
+    stage ('Run blue service'){
+        steps{
+            withAWS(region: 'us-west-2', credentials: 'capstone') {
+               	sh '''
+		kubectl apply -f ./blue-service.json
+		''' 
+            }
+        }
+  }
+    stage ('Run green service'){
+        steps{
+            withAWS(region: 'us-west-2', credentials: 'capstone') {
+               	sh '''
+		kubectl apply -f ./green-service.json
+		''' 
+            }
+        }
+  }		  
 }
