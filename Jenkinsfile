@@ -27,9 +27,9 @@ pipeline {
             }
             stage('Set current kubectl context') {
                 steps {
-                    withAWS(region: 'us-west-2', credentials: 'capstone') {
+                    withAWS(region: 'us-east-1', credentials: 'capstone') {
                         sh '''
-                        kubectl config use-context arn:aws:eks:us-west-2:411233875469:cluster/capstoneproject
+                        kubectl config use-context arn:aws:eks:us-east-1:526037358249:cluster/extravagant-party-1603966107
                         '''
                     }
                 }
@@ -39,7 +39,7 @@ pipeline {
                     withAWS(region: 'us-west-2', credentials: 'capstone') {
                         sh '''
                 kubectl apply -f ./blue-controller.json
-                ''' 
+                '''
                     }
                 }
             }
@@ -48,27 +48,27 @@ pipeline {
                     withAWS(region: 'us-west-2', credentials: 'capstone') {
                         sh '''
                 kubectl apply -f ./green-controller.json
-                ''' 
+                '''
                     }
                 }
         }
             stage ('Run blue service'){
                 steps{
-                    withAWS(region: 'us-west-2', credentials: 'capstone') {
+                    withAWS(region: 'us-east-1', credentials: 'capstone') {
                         sh '''
                 kubectl apply -f ./blue-service.json
-                ''' 
+                '''
                     }
                 }
         }
             stage ('Run green service'){
                 steps{
-                    withAWS(region: 'us-west-2', credentials: 'capstone') {
+                    withAWS(region: 'us-east-1', credentials: 'capstone') {
                         sh '''
                 kubectl apply -f ./green-service.json
-                ''' 
+                '''
                     }
                 }
-        }		  
+        }
     }
 }
